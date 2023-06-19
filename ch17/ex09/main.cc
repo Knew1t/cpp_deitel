@@ -1,12 +1,11 @@
 #include <iostream>
-#include "date.h"
+#include "DateAndTime.h"
 
 int main (int argc, char *argv[]) {
-  Date date1(12,21,2004);
-  date1.print();
- for (int i = 0; i < 30; i++) {
-   date1.NextDay();
-   date1.print();
+  DateAndTime date1(23,58,57,12,21,2004);
+ for (int i = 0; i < 70; i++) {
+   date1.tick();
+   date1.printUniversal();
  } 
   return 0;
 }

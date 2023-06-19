@@ -1,13 +1,16 @@
 #include "DateAndTime.h" // include definition of class Time from Time.h using namespace std;
+#include <array>
 #include <iomanip>
 #include <iostream>
 #include <stdexcept>
-#include <array>
 using namespace std;
 // Time constructor initializes each data member
-DateAndTime::DateAndTime(int hour, int minute, int second, int month, int day,
-                         int year) {}
+DateAndTime::DateAndTime(int h, int m, int s, int mon, int dy, int yr)
+    : hour(h), minute(m), second(s), month(mon), day(dy), year(yr) {}
 
+void DateAndTime::printDate() const {
+    cout << month << '/' << day << '/' << year;
+} // end function print
 void DateAndTime::setTime(int h, int m, int s) {
     setHour(h);   // set private field hour
     setMinute(m); // set
@@ -42,33 +45,18 @@ unsigned DateAndTime::getMinute() const { return minute; }
 unsigned DateAndTime::getSecond() const { return second; }
 
 void DateAndTime::printUniversal() const {
-    cout << setfill('0') << setw(2) << getHour() << ":" << setw(2)
-         << getMinute() << ":" << setw(2) << getSecond();
+    printDate();
+    cout << " " << setfill('0') << setw(2) << getHour() << ":" << setw(2)
+         << getMinute() << ":" << setw(2) << getSecond() << endl;
 }
 
 void DateAndTime::printStandard() const {
+    printDate();
     cout << ((getHour() == 0 || getHour() == 12) ? 12 : getHour() % 12) << ":"
          << setfill('0') << setw(2) << getMinute() << ":" << setw(2)
          << getSecond() << (hour < 12 ? " AM" : " PM");
 }
 
-void DateAndTime::tick() {
-    if (getSecond() == 59) {
-        setSecond(0);
-        if (getMinute() == 59) {
-            setMinute(0);
-            if (getHour() == 23) {
-                setHour(0);
-            } else {
-                hour += 1;
-            }
-        } else {
-            minute += 1;
-        }
-    } else {
-        second += 1;
-    }
-}
 // DateAndTime::Date(int mn, int dy, int yr) : month(mn), day(dy), year(yr) {
 //
 //     if (mn > 0 && mn <= 12) // validate the month
@@ -85,10 +73,7 @@ void DateAndTime::tick() {
 //     cout << endl;
 // }
 
-void DateAndTime::print() {
-    cout << month << '/' << day << '/' << year << endl;
-} // end function print
-  //
+//
 static const array<int, 13> daysPerMonth = {0,  31, 28, 31, 30, 31, 30,
                                             31, 31, 30, 31, 30, 31};
 
@@ -109,9 +94,8 @@ unsigned int DateAndTime::CheckDay(int testDay) {
 void DateAndTime::NextDay() {
     CheckDay(day);
     int max_days_in_month = daysPerMonth[month];
-    if (month == 2 && 
-        (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))) {
-      max_days_in_month = 29;
+    if (month == 2 && (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))) {
+        max_days_in_month = 29;
     }
     if (day == max_days_in_month) {
         day = 1;
@@ -123,5 +107,24 @@ void DateAndTime::NextDay() {
         }
     } else {
         day += 1;
+    }
+}
+
+void DateAndTime::tick() {
+    if (getSecond() == 59) {
+        setSecond(0);
+        if (getMinute() == 59) {
+            setMinute(0);
+            if (getHour() == 23) {
+                setHour(0);
+                NextDay();
+            } else {
+                hour += 1;
+            }
+        } else {
+            minute += 1;
+        }
+    } else {
+        second += 1;
     }
 }
