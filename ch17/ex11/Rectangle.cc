@@ -5,6 +5,12 @@
 using namespace std;
 Rectangle::Rectangle(float w, float l) { SetParameters(w, l); }
 
+float Rectangle::Perimeter() {
+  return (GetWidth()+GetLength())*2;
+}
+float Rectangle::Area() {
+  return GetWidth()*GetLength();
+}
 void Rectangle::SetParameters(float w, float l) {
     SetLength(l);
     SetWidth(w);
@@ -23,10 +29,6 @@ void Rectangle::SetWidth(float w) {
         width = w;
 }
 
-float Rectangle::GetWidth() const {
-  return width;
-}
+float Rectangle::GetWidth() const { return width; }
 
-float Rectangle::GetLength() const {
-  return length;
-}
+float Rectangle::GetLength() const { return length; }
