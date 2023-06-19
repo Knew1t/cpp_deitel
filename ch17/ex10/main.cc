@@ -7,18 +7,7 @@
 using namespace std;
 
 int main() {
-    Time t1(23, 59, 0);
-    clock_t start_time;
-    start_time = clock();
-    for (;;) {
-      cout << "hey cycle";
-        t1.tick();
-        t1.printStandard();
-        if (clock() - start_time >= 500) {
-            break;
-        } else {
-          cout << "go" << endl;
-        }
-    }
+  Time a(400,500,500);
+  a.printStandard();
 
 } // endmain
