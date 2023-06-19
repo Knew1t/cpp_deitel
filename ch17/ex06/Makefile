@@ -1,6 +1,6 @@
 SRC = *.cc
 
 all:
-	g++ $(SRC)
-	./a.out
+	g++ -std=c++17 $(SRC)
+	./a.out 
 	rm a.out

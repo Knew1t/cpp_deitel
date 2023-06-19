@@ -14,10 +14,10 @@ class Rational {
     void PrintRational() const;
     void PrintRatFloating() const;
 
-    int getDenominator() const;
-    int getNumerator() const;
-    void setDenominator(int) ;
-    void setNumerator(int) ;
+    int GetDenominator() const;
+    int GetNumerator() const;
+    void SetDenominator(int);
+    void SetNumerator(int);
 
   private:
     int numerator;
