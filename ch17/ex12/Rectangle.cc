@@ -23,6 +23,10 @@ void Rectangle::SetCoordinates(array<float, 2> p1_in, array<float, 2> p2_in,
     } else {
         throw invalid_argument("not a Rectangle");
     }
+    if (p1_in[0] > 20.0 || p1_in[1] > 20.0 || p2_in[0] > 20.0 ||
+        p2_in[1] > 20.0 || p3_in[0] > 20.0 || p3_in[1] > 20.0 ||
+        p4_in[0] > 20.0 || p4_in[1] > 20.0)
+        throw invalid_argument("coordinate exceed 20");
 }
 
 void Rectangle::SetPointCoordinates(array<float, 2> incoming_coordinates,
@@ -67,9 +71,16 @@ float Rectangle::GetLength() const {
     }
 }
 
-bool Rectangle::IsSquare(Rectangle rect) const {
+bool Rectangle::IsSquare() const {
     if (GetLength() == GetWidth())
         return true;
     else
         return false;
+}
+
+float Rectangle::Area() {
+  return GetLength()*GetWidth();
+}
+float Rectangle::Perimeter() {
+  return GetLength()*2 + GetWidth()*2;
 }

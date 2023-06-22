@@ -24,8 +24,10 @@ class Rectangle {
 
     float GetLength() const;
     float GetWidth() const;
+    float Perimeter() const; 
+    float Area() const;
 
-    bool IsSquare(Rectangle) const;
+    bool IsSquare() const;
 
   private:
     float width;
