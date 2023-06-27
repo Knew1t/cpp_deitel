@@ -22,11 +22,22 @@
 
 DoubleSubscriptedArray::DoubleSubscriptedArray(int rws, int cls)
     : rows(rws * cls != 0 ? rws : throw std::invalid_argument("can't be zero")),
-      columns(cls), ptr(new int[rows * columns]) {
-    // std::cout << "array constructed" << std::endl;
-    // for (int i = 0; i < rows*columns; i++) {
-    //   std::cout << ptr[i] << std::endl;
-    // }
+      columns(cls), ptr(new int[rows * columns]) {}
+
+const DoubleSubscriptedArray &
+DoubleSubscriptedArray::operator=(const DoubleSubscriptedArray &right) {
+  if (&right != this){
+    if (rows*columns != right.rows * right.columns){
+      delete [] ptr;
+      ptr = new int[right.rows * right.columns];
+      rows = right.rows;
+      columns = right.columns;
+    }
+    for (size_t i = 0; i < rows * columns; i++) {
+      ptr[i] = right.ptr[i];
+    }
+  } 
+    return *this;
 }
 
 DoubleSubscriptedArray::~DoubleSubscriptedArray() { delete[] ptr; }
@@ -84,6 +95,7 @@ bool DoubleSubscriptedArray::operator==(DoubleSubscriptedArray &right) const {
     }
     return false;
 }
+
 bool DoubleSubscriptedArray::operator!=(DoubleSubscriptedArray &right) const {
     return !(*this == right);
 }

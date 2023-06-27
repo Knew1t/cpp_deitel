@@ -22,12 +22,17 @@
 int main() {
 
     DoubleSubscriptedArray hello(1, 2);
-    DoubleSubscriptedArray gb(1, 3);
+    DoubleSubscriptedArray gb(1, 2);
     std::cout << "enter array 1x2" << std::endl;
     std::cin >> hello;
     std::cout << "enter array 1x2" << std::endl;
     std::cin >> gb;
     std::cout << (gb == hello)<< std::endl;
     std::cout << (gb != hello)<< std::endl;
+    hello = gb;
+    std::cout << "hello = gb" << std::endl;
+    std::cout << hello << std::endl;
+
+
     return 0;
 }

@@ -25,6 +25,7 @@ class DoubleSubscriptedArray {
 
   public:
     explicit DoubleSubscriptedArray(int = 1, int = 1);
+    const DoubleSubscriptedArray& operator=(const DoubleSubscriptedArray&);
     ~DoubleSubscriptedArray();
     int operator()(int, int) const;
     int &operator()(int, int);
